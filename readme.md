@@ -32,4 +32,4 @@
 
 
 ### Where you can find me?
-📫 You can reach me on Discord (null.#9401)
+📫 You can contact me on Discord (null.#9401)
