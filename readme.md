@@ -2,7 +2,7 @@
 
 ## Just a random guy on internet who ❤ writing code!
 - ⚡ I'm currently working on ✨**NOTHNING**✨
-- 📚 I'm currently learning Java. 
+- 📚 I'm currently learning Kotlin. 
 - ⚡ Fun fact: I love playing guitar🎶
 
 ### Github Stats
