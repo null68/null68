@@ -2,7 +2,7 @@
 
 ## Just a random guy on internet who ❤ writing code!
 - ⚡ I'm currently working on ✨**NOTHNING**✨
-- 📚 I'm currently learning GoLang <img src="https://contentstatic.techgig.com/thumb/msid-82278297,width-460,resizemode-4/5-Top-advantages-of-using-Golang-programming-language.jpg?35743" width="26px" alt="Golang" />. 
+- 📚 I'm currently learning GoLang. 
 - ⚡ Fun fact: I love playing guitar🎶
 
 ### Github Stats
