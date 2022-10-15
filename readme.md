@@ -2,7 +2,7 @@
 
 ## Just a random guy on internet who ❤ writing code!
 - ⚡ I'm currently working on ✨**NOTHNING**✨
-- 📚 I'm currently learning TypeScript. 
+- 📚 I'm currently learning GoLang [<img align="left" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1280px-Go_Logo_Blue.svg.png" width="26px" alt="Golang">]. 
 - ⚡ Fun fact: I love playing guitar🎶
 
 ### Github Stats
