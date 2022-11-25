@@ -2,7 +2,7 @@
 
 ## Just a random guy on internet who ❤ writing code!
 - ⚡ I'm currently working on ✨**NOTHNING**✨
-- 📚 I'm currently learning Go. 
+- 📚 I'm currently learning Rust. 
 - ⚡ Fun fact: I love playing guitar🎶
 
 ### Github Stats
