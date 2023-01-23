@@ -5,18 +5,6 @@
 - 📚 I'm currently learning Rust. 
 - ⚡ Fun fact: I love playing guitar🎶
 
-### Github Stats
-
-[<img align="left" width="50%" src="https://github-readme-stats.vercel.app/api?username=null68&theme=dark&show_icons=true">](https://metrics.lecoq.io/null68?template=classic)
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
 ### Languages and Tools
 [<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />](https://code.visualstudio.com)
 [<img align="left" alt="JavaScript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" />](https://www.javascript.com)
