@@ -1,5 +1,5 @@
 # 💫 About Me:
-Hi there! 👋<br>Just a random guy on internet who ❤ writing code!<br><br>⚡ I'm currently working on ✨NOTHNING✨<br>📚 I'm currently learning Rust.<br>⚡ Fun fact: I love playing guitar🎶
+Hi there! 👋<br>Just a random guy on internet who ❤ writing code!<br><br>⚡ I'm currently working on ✨NOTHING✨<br>📚 I'm currently learning Rust.<br>⚡ Fun fact: I love playing guitar🎶
 
 
 # 💻 Tech Stack:
