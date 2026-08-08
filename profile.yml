@@ -1,0 +1,21 @@
+username: null68              # shown in the "user@host" title
+hostname: github
+github_username: null68       # actual GitHub login used for API calls
+
+# Static fields (not available via public API, set by hand)
+os: "Void Linux, Windows"
+host: "/dev/null"
+languages: "JS, TS, C++, Rust, Go, Python"
+frameworks: "Node.js, React, Tauri, OpenGL"
+ide: "Zed, Neovim"
+shell: "zsh, bash"
+achievements: "Pull Shark, Pair Extraordinaire"
+
+birthdate: "2006-02-08"
+
+# Art
+art_dir: art                  # folder of .txt icon frames (loaded in filename order)
+animation_display_seconds: 4   # hold time per icon
+transition_seconds: 1.5       # glitch/morph transition time between icons
+
+loc_cache_file: .loc-cache.json

@@ -1,0 +1,70 @@
+name: Update Profile Dashboard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'profile.yml'
+      - 'art/**'
+      - 'scripts/**'
+      - '.github/workflows/update-dashboard.yml'
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch: {}      # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-dashboard
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Backup current SVGs
+        run: |
+          mkdir -p .backup
+          cp -f profile-dark.svg .backup/profile-dark.svg 2>/dev/null || true
+          cp -f profile-light.svg .backup/profile-light.svg 2>/dev/null || true
+
+      - name: Generate dashboard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/generate_dashboard.py
+
+      - name: Validate generated SVGs (restore backup on failure)
+        run: |
+          for f in profile-dark.svg profile-light.svg; do
+            if [ ! -s "$f" ] || ! grep -q "<svg" "$f" || ! grep -q "</svg>" "$f"; then
+              echo "::warning::$f looks invalid, restoring previous version"
+              cp -f ".backup/$f" "$f" 2>/dev/null || true
+            fi
+          done
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add profile-dark.svg profile-light.svg .stats-cache.json .loc-cache.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: refresh profile dashboard [skip ci]"
+          git pull --rebase origin main
+          git push origin main
