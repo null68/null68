@@ -111,8 +111,13 @@ def fetch_github_stats(username, token):
 def fetch_loc_stats(username, token, cache_file):
     """Sum additions/deletions from the per-repo contributor-stats endpoint.
     Skips forks so vendored/upstream code someone else wrote never counts
-    as yours. Results are cached per-repo since this endpoint is expensive
-    (GitHub computes it async — a 202 means 'try again shortly')."""
+    as yours. Each repo is re-queried only when its `pushed_at` has moved
+    since the last successful fetch — this endpoint is expensive (GitHub
+    computes it async — a 202 means 'try again shortly'), but caching on
+    "have we ever fetched this repo" (the old behaviour) means a repo's
+    count freezes forever the moment it's first cached, even as you keep
+    pushing to it. Keying the cache on last-push time fixes that while
+    still avoiding needless re-fetches for untouched repos."""
     cache_path = ROOT_DIR / cache_file
     cache = {}
     if cache_path.exists():
@@ -132,9 +137,10 @@ def fetch_loc_stats(username, token, cache_file):
             if r.status_code != 200:
                 print(f"WARN: Fetch repos failed with {r.status_code}")
                 break
-            if not r.json():
+            batch = r.json()
+            if not batch:
                 break
-            repos.extend(r.json())
+            repos.extend(batch)
             page += 1
 
         if not repos and page == 1:
@@ -147,26 +153,45 @@ def fetch_loc_stats(username, token, cache_file):
             if repo.get("fork"):
                 continue  # not your code — skip forked upstream history
             fn = repo["full_name"]
-            if fn in repo_cache:
-                total_add += repo_cache[fn].get("additions", 0)
-                total_del += repo_cache[fn].get("deletions", 0)
+            pushed_at = repo.get("pushed_at")
+            cached = repo_cache.get(fn)
+
+            # Trust the cache only if nothing has been pushed since we last counted it
+            if cached and cached.get("pushed_at") == pushed_at:
+                total_add += cached.get("additions", 0)
+                total_del += cached.get("deletions", 0)
                 continue
+
             try:
                 r = requests.get(f"https://api.github.com/repos/{fn}/stats/contributors",
                                  headers=headers, timeout=30)
                 if r.status_code == 202:
                     print(f"INFO: {fn} stats still computing (202), will retry next run")
+                    if cached:  # keep last-known numbers instead of dropping the repo to 0
+                        total_add += cached.get("additions", 0)
+                        total_del += cached.get("deletions", 0)
                     continue
                 if r.status_code == 200 and r.json():
+                    matched = False
                     for c in r.json():
                         if c.get("author", {}).get("login", "").lower() == username.lower():
                             a = sum(w.get("a", 0) for w in c.get("weeks", []))
                             d = sum(w.get("d", 0) for w in c.get("weeks", []))
                             total_add += a
                             total_del += d
-                            repo_cache[fn] = {"additions": a, "deletions": d}
+                            repo_cache[fn] = {"additions": a, "deletions": d, "pushed_at": pushed_at}
+                            matched = True
                             break
+                    if not matched and cached:
+                        total_add += cached.get("additions", 0)
+                        total_del += cached.get("deletions", 0)
+                elif cached:  # non-200/202 hiccup — don't let it zero the repo out
+                    total_add += cached.get("additions", 0)
+                    total_del += cached.get("deletions", 0)
             except Exception:
+                if cached:
+                    total_add += cached.get("additions", 0)
+                    total_del += cached.get("deletions", 0)
                 continue
 
         total = total_add + total_del
