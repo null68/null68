@@ -1628,7 +1628,7 @@
     <text x="364.0" y="275"><tspan class="label">Stars: </tspan><tspan fill="#24292f" class="val">3</tspan></text>
     <text x="364.0" y="294"><tspan class="label">Followers: </tspan><tspan fill="#24292f" class="val">11</tspan></text>
     <text x="364.0" y="313"><tspan class="label">Contributions: </tspan><tspan fill="#24292f" class="val">115</tspan></text>
-    <text x="364.0" y="332"><tspan class="label">Lines of code: </tspan><tspan fill="#24292f" class="val">106.2K</tspan><tspan fill="#57606a" class="val"> (</tspan><tspan fill="#1a7f37" class="val">105.0K++</tspan><tspan fill="#57606a" class="val">, </tspan><tspan fill="#cf222e" class="val">1.2K--</tspan><tspan fill="#57606a" class="val">)</tspan></text>
+    <text x="364.0" y="332"><tspan class="label">Lines of code: </tspan><tspan fill="#24292f" class="val">106.7K</tspan><tspan fill="#57606a" class="val"> (</tspan><tspan fill="#1a7f37" class="val">105.5K++</tspan><tspan fill="#57606a" class="val">, </tspan><tspan fill="#cf222e" class="val">1.3K--</tspan><tspan fill="#57606a" class="val">)</tspan></text>
     <text x="364.0" y="370"><tspan class="label">Shell: </tspan><tspan fill="#24292f" class="val">zsh, bash</tspan></text>
     <text x="364.0" y="389"><tspan class="label">Achievements: </tspan><tspan fill="#24292f" class="val">Pull Shark, Pair Extraordinaire</tspan></text>
   </g>
